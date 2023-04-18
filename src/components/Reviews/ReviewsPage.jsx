@@ -14,7 +14,7 @@ const ReviewsPage = () => {
   }, []);
 
   return (
-    <div className="h-max flex flex-col items-center columns-1 bg-stone-500 gap-5 mt-5">
+    <section className="h-max flex flex-col items-center columns-1 gap-5 mt-5">
       {!isLoading &&
         reviews.map((review, index) => {
           return <ReviewCard key={index} review={review} />;
@@ -22,10 +22,10 @@ const ReviewsPage = () => {
       {!!isLoading &&
         new Array(10).fill(1).map(() => {
           return (
-            <div className="w-96 h-[360px] bg-stone-300 drop-shadow-md rounded-sm"></div>
+            <div className="w-96 h-[360px] drop-shadow-md rounded-sm"></div>
           );
         })}
-    </div>
+    </section>
   );
 };
 
