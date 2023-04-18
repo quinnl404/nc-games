@@ -3,6 +3,7 @@ import { ReactComponent as VotesIcon } from "../../icons/votes.svg";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import PostInfo from "../PostInfo";
 dayjs.extend(relativeTime);
 
 const ReviewCard = ({ review }) => {
@@ -31,19 +32,11 @@ const ReviewCard = ({ review }) => {
         <p className="text-[10px] font-thin self-start ml-2 mb-1">
           <i>{`${getReviewTextPreview()}...`}</i>
         </p>
-        <span className="flex flex-row gap-2 w-full justify-end items-center mr-2 font-extralight text-xs">
-          <p className="text-xs font-extralight">
-            {dayjs().to(dayjs(review.created_at))}
-          </p>
-          <span className="flex flex-row items-center gap-1">
-            <p>{`${votes}`}</p>
-            <VotesIcon className="w-4 mb-[3px] fill-stone-700 stroke-stone-900" />
-          </span>
-          <span className="flex flex-row items-center gap-1">
-            <p>{`${comment_count}`}</p>
-            <CommentIcon className="w-4 fill-stone-700 stroke-stone-900" />
-          </span>
-        </span>
+        <PostInfo
+          created_at={review.created_at}
+          comment_count={review.comment_count}
+          votes={review.votes}
+        />
       </div>
     </Link>
   );
