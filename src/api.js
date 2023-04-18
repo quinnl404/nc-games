@@ -15,3 +15,9 @@ export const fetchSingleReview = (reviewId) => {
     return response.data.review;
   });
 };
+
+export const fetchComments = (reviewId) => {
+  return api.get(`/reviews/${reviewId}/comments`).then((response) => {
+    return response.data.comments;
+  });
+};
