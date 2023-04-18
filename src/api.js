@@ -32,3 +32,10 @@ export const voteOnPost = (postData, incrementBy) => {
   }
   // implement comment voting
 };
+
+export const postComment = (comment, reviewId) => {
+  console.log(`/reviews/${reviewId}/comments`);
+  return api.post(`/reviews/${reviewId}/comments`, comment).then((response) => {
+    return response.data.comments;
+  });
+};

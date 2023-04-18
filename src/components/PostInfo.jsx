@@ -5,6 +5,7 @@ import { ReactComponent as DownVoteIcon } from "../icons/down_vote.svg";
 import { ReactComponent as CommentIcon } from "../icons/comment.svg";
 import { useState } from "react";
 import * as api from "../api";
+import toast from "react-hot-toast";
 dayjs.extend(relativeTime);
 
 const VotingTray = ({ postData, votes, setVotes }) => {
@@ -42,6 +43,7 @@ const VotingTray = ({ postData, votes, setVotes }) => {
         setVotes(votes);
         setCurrentVote(previousVote);
         setIsVoting(false);
+        toast.error("Vote failed! Please try again later.");
       });
   };
 
