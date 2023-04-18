@@ -9,6 +9,7 @@ dayjs.extend(relativeTime);
 
 const VotingTray = ({ postData, votes, setVotes }) => {
   const [currentVote, setCurrentVote] = useState("neither");
+  const [previousVote, setPreviousVote] = useState("neither");
   const [isVoting, setIsVoting] = useState(false);
 
   const handleVoteClick = (voteType) => {
@@ -23,6 +24,7 @@ const VotingTray = ({ postData, votes, setVotes }) => {
     setVotes((currentVotes) => {
       return currentVotes + voteIncrement;
     });
+    setPreviousVote(currentVote);
     setCurrentVote(() => {
       if (isUnvoting) {
         return "neither";
@@ -31,10 +33,16 @@ const VotingTray = ({ postData, votes, setVotes }) => {
       }
     });
 
-    api.voteOnPost(postData, voteIncrement).then((response) => {
-      setVotes(response);
-      setIsVoting(false);
-    });
+    api
+      .voteOnPost(postData, voteIncrement)
+      .then((response) => {
+        setIsVoting(false);
+      })
+      .catch((error) => {
+        setVotes(votes);
+        setCurrentVote(previousVote);
+        setIsVoting(false);
+      });
   };
 
   return (
