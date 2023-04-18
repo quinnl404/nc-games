@@ -21,3 +21,14 @@ export const fetchComments = (reviewId) => {
     return response.data.comments;
   });
 };
+
+export const voteOnPost = (postData, incrementBy) => {
+  if (postData.type === "review") {
+    return api
+      .patch(`/reviews/${postData.id}`, { inc_votes: incrementBy })
+      .then((response) => {
+        return response.data.review.votes;
+      });
+  }
+  // implement comment voting
+};
