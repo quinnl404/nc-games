@@ -6,7 +6,10 @@ const Comment = ({ comment }) => {
       <p className="text-xs self-start ml-1 mt-1">{comment.author}</p>
       <p className="text-sm font-light self-start ml-2 mb-1">{comment.body}</p>
       <span className="mr-2">
-        <PostInfo created_at={comment.created_at} votes={comment.votes} />
+        <PostInfo
+          created_at={comment.created_at}
+          initialVotes={comment.votes}
+        />
       </span>
     </div>
   );
