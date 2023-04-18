@@ -2,16 +2,7 @@ import { ReactComponent as CommentIcon } from "../../icons/comment.svg";
 import { ReactComponent as VotesIcon } from "../../icons/votes.svg";
 
 const ReviewCard = ({ review }) => {
-  const {
-    title,
-    category,
-    review_img_url,
-    owner,
-    review_body,
-    comment_count,
-    votes,
-    created_at,
-  } = review;
+  const { review_body, comment_count, votes } = review;
   const getReviewTextPreview = () => {
     const firstSentenceOfReview = review_body.match(/^.*?[\.!\?](?:\s|$)/)[0];
     if (firstSentenceOfReview.split(" ").length > 20) {
