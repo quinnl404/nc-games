@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as api from "../../api";
-import Comment from "../Comment";
+import Comment from "../Comments/Comment";
+import CommentBox from "../Comments/CommentBox";
 import PostInfo from "../PostInfo";
 
 const SingleReviewPage = () => {
+  const [commentCount, setCommentCount] = useState(0);
+
   const [isReviewLoading, setIsReviewLoading] = useState(true);
   const [review, setReview] = useState([]);
 
@@ -15,6 +18,7 @@ const SingleReviewPage = () => {
   useEffect(() => {
     api.fetchSingleReview(review_id).then((review) => {
       setReview(review);
+      setCommentCount(review.comment_count);
       setIsReviewLoading(false);
     });
     api.fetchComments(review_id).then((comments) => {
@@ -40,7 +44,7 @@ const SingleReviewPage = () => {
             {review.review_body}
           </p>
           <PostInfo
-            comment_count={review.comment_count}
+            comment_count={commentCount}
             created_at={review.created_at}
             initialVotes={review.votes}
             postData={{ type: "review", id: review.review_id }}
@@ -52,10 +56,15 @@ const SingleReviewPage = () => {
       {!!isReviewLoading && (
         <div className="w-96 h-96 bg-stone-300 group drop-shadow-md rounded-sm hover:drop-shadow-2xl hover:shadow-2xl hover:shadow-stone-600 flex flex-col justify-items-center items-center"></div>
       )}
+      <CommentBox
+        setComments={setComments}
+        setCommentCount={setCommentCount}
+        reviewId={review_id}
+      />
       {!areCommentsLoading && (
         <section className="h-max flex flex-col items-center columns-1 gap-3  justify-items-center">
-          {comments.map((comment, index) => {
-            return <Comment key={index} comment={comment} />;
+          {comments.map((comment) => {
+            return <Comment key={comment.comment_id} comment={comment} />;
           })}
         </section>
       )}

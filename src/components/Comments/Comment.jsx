@@ -1,4 +1,4 @@
-import PostInfo from "./PostInfo";
+import PostInfo from "../PostInfo";
 
 const Comment = ({ comment }) => {
   return (

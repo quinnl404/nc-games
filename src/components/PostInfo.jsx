@@ -3,13 +3,14 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { ReactComponent as UpVoteIcon } from "../icons/up_vote.svg";
 import { ReactComponent as DownVoteIcon } from "../icons/down_vote.svg";
 import { ReactComponent as CommentIcon } from "../icons/comment.svg";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import * as api from "../api";
+import toast from "react-hot-toast";
 dayjs.extend(relativeTime);
 
 const VotingTray = ({ postData, votes, setVotes }) => {
   const [currentVote, setCurrentVote] = useState("neither");
-  const [previousVote, setPreviousVote] = useState("neither");
+  const previousVote = useRef("neither");
   const [isVoting, setIsVoting] = useState(false);
 
   const handleVoteClick = (voteType) => {
@@ -24,7 +25,7 @@ const VotingTray = ({ postData, votes, setVotes }) => {
     setVotes((currentVotes) => {
       return currentVotes + voteIncrement;
     });
-    setPreviousVote(currentVote);
+    previousVote.current = currentVote;
     setCurrentVote(() => {
       if (isUnvoting) {
         return "neither";
@@ -40,8 +41,9 @@ const VotingTray = ({ postData, votes, setVotes }) => {
       })
       .catch((error) => {
         setVotes(votes);
-        setCurrentVote(previousVote);
+        setCurrentVote(previousVote.current);
         setIsVoting(false);
+        toast.error("Vote failed! Please try again later.");
       });
   };
 
