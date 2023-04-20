@@ -5,9 +5,13 @@ const api = axios.create({
 });
 
 export const fetchReviews = (params) => {
-  return api.get(`/reviews`, { params }).then((response) => {
-    return response.data.reviews;
-  });
+  return api
+    .get(`/reviews`, {
+      params,
+    })
+    .then((response) => {
+      return response.data.reviews;
+    });
 };
 
 export const fetchSingleReview = (reviewId) => {
