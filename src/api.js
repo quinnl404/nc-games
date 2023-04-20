@@ -4,8 +4,8 @@ const api = axios.create({
   baseURL: "https://board-games-api-q1cq.onrender.com/api",
 });
 
-export const fetchReviews = () => {
-  return api.get("/reviews").then((response) => {
+export const fetchReviews = (params) => {
+  return api.get(`/reviews`, { params }).then((response) => {
     return response.data.reviews;
   });
 };
@@ -36,5 +36,11 @@ export const voteOnPost = (postData, incrementBy) => {
 export const postComment = (comment, reviewId) => {
   return api.post(`/reviews/${reviewId}/comments`, comment).then((response) => {
     return response.data.comments;
+  });
+};
+
+export const fetchCategories = () => {
+  return api.get("/categories").then((response) => {
+    return response.data.categories;
   });
 };
