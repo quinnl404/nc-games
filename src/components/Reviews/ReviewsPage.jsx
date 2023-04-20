@@ -36,7 +36,7 @@ const ReviewsPage = () => {
         toast.error("Failed to load reviews, please try again later!");
         setSearchParams(previousSearchParams.current);
       });
-  }, [searchParams]);
+  }, [searchParams, setSearchParams]);
 
   const handleChangeSearchParam = (param) => {
     previousSearchParams.current = searchParams;
