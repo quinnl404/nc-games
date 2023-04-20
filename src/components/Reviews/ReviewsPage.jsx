@@ -42,7 +42,7 @@ const ReviewsPage = () => {
       setCategories(categories);
       setAreCategoriesLoading(false);
     });
-  }, [searchParams]);
+  }, [searchParams, category, setSearchParams]);
 
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);

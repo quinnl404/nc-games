@@ -25,7 +25,7 @@ const SingleReviewPage = () => {
       setComments(comments);
       setAreCommentsLoading(false);
     });
-  }, []);
+  }, [review_id]);
 
   return (
     <article className="h-max flex flex-col items-center columns-1 bg-stone-500 gap-5 mt-5">
