@@ -9,14 +9,16 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState("tickle122");
 
   return (
-    <div className="">
+    <>
       <Navbar />
+      <br />
+      <br />
       <Routes>
         <Route path="/" element={<ReviewsPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/reviews/:review_id" element={<SingleReviewPage />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
