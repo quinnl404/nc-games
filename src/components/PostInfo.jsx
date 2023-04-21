@@ -56,7 +56,7 @@ const VotingTray = ({ postData, votes, setVotes }) => {
         disabled={isVoting}
       >
         <UpVoteIcon
-          className={`w-4 ${
+          className={`${
             currentVote === "up"
               ? isVoting
                 ? "fill-green-900"
@@ -77,7 +77,7 @@ const VotingTray = ({ postData, votes, setVotes }) => {
         disabled={isVoting}
       >
         <DownVoteIcon
-          className={`w-4 ${
+          className={`${
             currentVote === "down"
               ? !isVoting
                 ? "fill-red-600"
@@ -97,7 +97,7 @@ const VotingTray = ({ postData, votes, setVotes }) => {
 const VoteDisplay = ({ votes }) => {
   return (
     <>
-      <UpVoteIcon className="w-4 fill-stone-700 stroke-transparent" />
+      <UpVoteIcon className="fill-stone-700 stroke-transparent mb-1" />
       <p>{`${votes}`}</p>
     </>
   );
@@ -112,10 +112,8 @@ const PostInfo = ({
 }) => {
   const [votes, setVotes] = useState(initialVotes);
   return (
-    <span className="flex flex-row gap-2 w-full justify-end items-center mr-3 font-extralight text-xs">
-      <p className="text-xs font-extralight">
-        {dayjs(created_at).format("D MMM YYYY")}
-      </p>
+    <span className="flex flex-row gap-6 justify-end items-center mr-1 text-lg">
+      <p className="">{dayjs(created_at).format("D MMM YYYY")}</p>
       <span className="flex flex-row items-center gap-1">
         {voteable && (
           <VotingTray votes={votes} setVotes={setVotes} postData={postData} />
@@ -125,7 +123,7 @@ const PostInfo = ({
       {comment_count !== undefined && (
         <span className="flex flex-row items-center gap-1">
           <p>{`${comment_count}`}</p>
-          <CommentIcon className="w-4 fill-stone-700 stroke-transparent " />
+          <CommentIcon className="fill-stone-700 stroke-transparent" />
         </span>
       )}
     </span>

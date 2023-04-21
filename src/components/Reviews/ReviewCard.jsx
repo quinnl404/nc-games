@@ -20,28 +20,38 @@ const ReviewCard = ({ review }) => {
   };
 
   return (
-    <Link to={`/reviews/${review.review_id}`}>
-      <div className="w-96 bg-stone-300 group drop-shadow-md rounded-sm hover:drop-shadow-2xl hover:shadow-2xl hover:shadow-stone-600 flex flex-col justify-items-center items-center ">
-        <span className="flex flex-row self-start ml-1 items-baseline gap-1">
-          <h2 className="text-xs group-hover:font-semibold">{review.title}</h2>
+    <div className="bg-stone-300 group drop-shadow-md rounded-sm hover:drop-shadow-2xl hover:shadow-2xl hover:shadow-stone-600 flex flex-col justify-items-center  mb-2 w-full xl:w-5/6">
+      <Link className="" to={`/reviews/${review.review_id}`}>
+        <span className="flex flex-row self-start pr-1 pl-1 items-baseline gap-1 justify-between w-full">
+          <h2 className="group-hover:font-semibold">{review.title}</h2>
           <p>
-            <i className="text-[10px] font-thin">{review.category}</i>
+            <i className="font-thin">{review.category}</i>
           </p>
         </span>
-        <img className="w-96 p-1 rounded-[6px]" src={review.review_img_url} />
-        <p className="text-xs self-start ml-1">{review.owner}</p>
-        <p className="text-[10px] font-thin self-start ml-2 mb-1">
-          <i>{`${getReviewTextPreview()}...`}</i>
-        </p>
-        <PostInfo
-          created_at={review.created_at}
-          comment_count={review.comment_count}
-          initialVotes={review.votes}
-          postData={{ type: "review", id: review.review_id }}
-          voteable={false}
-        />
-      </div>
-    </Link>
+        <div className="flex justify-center items-center">
+          <div className="flex flex-col items-center flex-wrap">
+            <img
+              alt="Board game"
+              className="p-1 rounded-[6px]"
+              src={review.review_img_url}
+            />
+            <div className="pl-2 pr-2">
+              <p className="self-start text-xl ml-1">{review.owner}</p>
+              <p className="font-thin text-xl ml-2 mb-1 self-auto">
+                <i>{`${getReviewTextPreview()}...`}</i>
+              </p>
+              <PostInfo
+                created_at={review.created_at}
+                comment_count={review.comment_count}
+                initialVotes={review.votes}
+                postData={{ type: "review", id: review.review_id }}
+                voteable={false}
+              />
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 };
 

@@ -28,21 +28,19 @@ const SingleReviewPage = () => {
   }, [review_id]);
 
   return (
-    <article className="h-max flex flex-col items-center columns-1 bg-stone-500 gap-5 mt-5">
-      <h2 className="justify-self-start">Review</h2>
+    <article className="h-max flex flex-col items-center columns-1  gap-5 mt-5">
+      <h2 className="justify-self-start text-stone-50">Review</h2>
       {!isReviewLoading && (
-        <div className="w-96 bg-stone-300  drop-shadow-md rounded-sm  flex flex-col justify-items-center items-center ">
+        <div className="w-full xl:w-5/6 bg-stone-300  drop-shadow-md rounded-sm  flex flex-col justify-items-center items-center ">
           <span className="flex flex-row self-start ml-1 items-baseline gap-1">
-            <h2 className="text-xs">{review.title}</h2>
+            <h2>{review.title}</h2>
             <p>
-              <i className="text-[10px] font-thin">{review.category}</i>
+              <i className="font-thin">{review.category}</i>
             </p>
           </span>
           <img className="w-96 p-1 rounded-[6px]" src={review.review_img_url} />
-          <p className="text-xs self-start ml-1">{review.owner}</p>
-          <p className="text-sm font-light self-start ml-2 mb-1 pl-1">
-            {review.review_body}
-          </p>
+          <p className="self-start ml-1">{review.owner}</p>
+          <p className="self-start ml-2 mb-1 pl-1">{review.review_body}</p>
           <PostInfo
             comment_count={commentCount}
             created_at={review.created_at}
@@ -52,7 +50,7 @@ const SingleReviewPage = () => {
           />
         </div>
       )}
-      <h2 className="justify-self-start">Comments</h2>
+      <h3 className="justify-self-start text-stone-50">Comments</h3>
       {!!isReviewLoading && (
         <div className="w-96 h-96 bg-stone-300 group drop-shadow-md rounded-sm hover:drop-shadow-2xl hover:shadow-2xl hover:shadow-stone-600 flex flex-col justify-items-center items-center"></div>
       )}

@@ -56,7 +56,7 @@ const ReviewsPage = () => {
   return (
     <section className="h-max flex flex-col items-center columns-1 gap-5 mt-5">
       <div className="flex flex-col items-center gap-1">
-        <h1>
+        <h1 className="text-stone-50">
           <b>{`${
             searchParams.has("category")
               ? searchParams
@@ -74,7 +74,9 @@ const ReviewsPage = () => {
           <span className="flex gap-1">
             {!areSelectableCategoriesLoading && (
               <>
-                <label htmlFor="review category">Choose a category:</label>
+                <label className="text-stone-50" htmlFor="review category">
+                  Choose a category:
+                </label>
                 <select
                   onChange={handleChangeSearchParam("category")}
                   value={searchParams.get("category")}
@@ -95,7 +97,9 @@ const ReviewsPage = () => {
             {!!areSelectableCategoriesLoading && <p>Loading...</p>}
           </span>
           <span className="flex gap-1">
-            <label htmlFor="order by">Order:</label>
+            <label className="text-stone-50" htmlFor="order by">
+              Order:
+            </label>
             <select
               onChange={handleChangeSearchParam("order")}
               value={searchParams.get("order")}
@@ -107,33 +111,37 @@ const ReviewsPage = () => {
             </select>
           </span>
           <span className="flex gap-1">
-            <label htmlFor="sort by">Sort By:</label>
+            <label className="text-stone-50" htmlFor="sort_by">
+              Sort By:
+            </label>
             <select
               onChange={handleChangeSearchParam("sort_by")}
               value={searchParams.get("sort_by")}
               className="text-center"
-              name="sort by"
+              name="sort_by"
             >
-              <option value="comment_count">{"comments"}</option>
               <option value="created_at">{"time"}</option>
+              <option value="comment_count">{"comments"}</option>
               <option value="votes">{"votes"}</option>
             </select>
           </span>
         </div>
       </div>
-      {!areReviewsLoading &&
-        reviews.map((review, index) => {
-          return <ReviewCard key={index} review={review} />;
-        })}
-      {!!areReviewsLoading &&
-        new Array(10).fill(1).map((_, index) => {
-          return (
-            <div
-              key={index}
-              className="w-96 h-[360px] drop-shadow-md rounded-sm bg-stone-300"
-            ></div>
-          );
-        })}
+      <div className="pl-1 pr-1 flex flex-col gap-5 flex-wrap items-center">
+        {!areReviewsLoading &&
+          reviews.map((review, index) => {
+            return <ReviewCard key={index} review={review} />;
+          })}
+        {!!areReviewsLoading &&
+          new Array(10).fill(1).map((_, index) => {
+            return (
+              <div
+                key={index}
+                className="w-96 h-[px] drop-shadow-md rounded-sm bg-stone-300"
+              ></div>
+            );
+          })}
+      </div>
     </section>
   );
 };
