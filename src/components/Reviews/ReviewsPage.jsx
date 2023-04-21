@@ -79,7 +79,7 @@ const ReviewsPage = () => {
                 </label>
                 <select
                   onChange={handleChangeSearchParam("category")}
-                  value={searchParams.get("category")}
+                  value={searchParams.get("category") || "all"}
                   className="text-center"
                   name="review category"
                 >
@@ -102,7 +102,7 @@ const ReviewsPage = () => {
             </label>
             <select
               onChange={handleChangeSearchParam("order")}
-              value={searchParams.get("order")}
+              value={searchParams.get("order") || "descending"}
               className="text-center"
               name="order by"
             >
@@ -116,7 +116,7 @@ const ReviewsPage = () => {
             </label>
             <select
               onChange={handleChangeSearchParam("sort_by")}
-              value={searchParams.get("sort_by")}
+              value={searchParams.get("sort_by") || "time"}
               className="text-center"
               name="sort_by"
             >
