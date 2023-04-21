@@ -3,7 +3,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { ReactComponent as UpVoteIcon } from "../icons/up_vote.svg";
 import { ReactComponent as DownVoteIcon } from "../icons/down_vote.svg";
 import { ReactComponent as CommentIcon } from "../icons/comment.svg";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { UserContext } from "../App";
+import { ReactComponent as DeleteIcon } from "../icons/trash.svg";
 import * as api from "../api";
 import toast from "react-hot-toast";
 dayjs.extend(relativeTime);
@@ -109,11 +111,33 @@ const PostInfo = ({
   comment_count,
   postData,
   voteable,
+  author,
+  setComments,
+  previousComments,
 }) => {
   const [votes, setVotes] = useState(initialVotes);
+  const { user } = useContext(UserContext);
+
+  const handleDelete = () => {
+    api
+      .deleteComment(postData.comment_id)
+      .then(() => {
+        toast.success("Succesfully deleted!");
+      })
+      .catch(() => {
+        toast.error("Deleting failed please try again later!");
+        setComments(previousComments);
+      });
+    setComments((currentComments) => {
+      return currentComments.filter(
+        (comment) => comment.comment_id !== postData.comment_id
+      );
+    });
+  };
+
   return (
     <span className="flex flex-row gap-6 justify-end items-center mr-1 text-lg">
-      <p className="">{dayjs(created_at).format("D MMM YYYY")}</p>
+      <p>{dayjs(created_at).format("D MMM YYYY")}</p>
       <span className="flex flex-row items-center gap-1">
         {voteable && (
           <VotingTray votes={votes} setVotes={setVotes} postData={postData} />
@@ -126,6 +150,11 @@ const PostInfo = ({
           <CommentIcon className="fill-stone-700 stroke-transparent" />
         </span>
       )}
+      {author === user ? (
+        <button onClick={handleDelete}>
+          <DeleteIcon className="stroke-red-700 fill-red-300" />
+        </button>
+      ) : null}
     </span>
   );
 };

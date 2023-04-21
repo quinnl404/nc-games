@@ -48,3 +48,15 @@ export const fetchCategories = () => {
     return response.data.categories;
   });
 };
+
+export const fetchUsers = () => {
+  return api.get("/users").then((response) => {
+    return response.data.users;
+  });
+};
+
+export const deleteComment = (commentId) => {
+  return api.delete(`/comments/${commentId}`).then((response) => {
+    return response.status;
+  });
+};

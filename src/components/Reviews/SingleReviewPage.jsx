@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import * as api from "../../api";
 import Comment from "../Comments/Comment";
@@ -13,6 +13,7 @@ const SingleReviewPage = () => {
 
   const [areCommentsLoading, setAreCommentsLoading] = useState(true);
   const [comments, setComments] = useState([]);
+  const previousComments = useRef();
   const { review_id } = useParams();
 
   useEffect(() => {
@@ -38,7 +39,11 @@ const SingleReviewPage = () => {
               <i className="font-thin">{review.category}</i>
             </p>
           </span>
-          <img className="w-96 p-1 rounded-[6px]" src={review.review_img_url} />
+          <img
+            alt="Board game"
+            className="w-96 p-1 rounded-[6px]"
+            src={review.review_img_url}
+          />
           <p className="self-start ml-1">{review.owner}</p>
           <p className="self-start ml-2 mb-1 pl-1">{review.review_body}</p>
           <PostInfo
@@ -62,7 +67,14 @@ const SingleReviewPage = () => {
       {!areCommentsLoading && (
         <section className="h-max flex flex-col items-center columns-1 gap-3  justify-items-center">
           {comments.map((comment) => {
-            return <Comment key={comment.comment_id} comment={comment} />;
+            return (
+              <Comment
+                key={comment.comment_id}
+                comment={comment}
+                setComments={setComments}
+                previousComments={previousComments}
+              />
+            );
           })}
         </section>
       )}

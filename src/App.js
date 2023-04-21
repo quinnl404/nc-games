@@ -1,23 +1,34 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import ReviewsPage from "./components/Reviews/ReviewsPage";
 import SingleReviewPage from "./components/Reviews/SingleReviewPage";
 
-function App() {
-  const [loggedInUser, setLoggedInUser] = useState("tickle122");
+export const UserContext = createContext();
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState("");
 
   return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+function App() {
+  return (
     <>
-      <Navbar />
-      <br />
-      <br />
-      <Routes>
-        <Route path="/" element={<ReviewsPage />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
-        <Route path="/reviews/:review_id" element={<SingleReviewPage />} />
-      </Routes>
+      <UserProvider>
+        <Navbar />
+        <br />
+        <br />
+        <Routes>
+          <Route path="/" element={<ReviewsPage />} />
+          <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="/reviews/:review_id" element={<SingleReviewPage />} />
+        </Routes>
+      </UserProvider>
     </>
   );
 }
