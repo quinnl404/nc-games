@@ -126,7 +126,9 @@ const ReviewsPage = () => {
                 </span>
               </>
             )}
-            {!!areSelectableCategoriesLoading && <p>Loading...</p>}
+            {!!areSelectableCategoriesLoading && (
+              <p className="text-white">Loading...</p>
+            )}
           </span>
         </div>
       </div>
