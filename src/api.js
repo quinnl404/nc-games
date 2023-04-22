@@ -39,12 +39,24 @@ export const voteOnPost = (postData, incrementBy) => {
 
 export const postComment = (comment, reviewId) => {
   return api.post(`/reviews/${reviewId}/comments`, comment).then((response) => {
-    return response.data.comments;
+    return response.data.comment;
   });
 };
 
 export const fetchCategories = () => {
   return api.get("/categories").then((response) => {
     return response.data.categories;
+  });
+};
+
+export const fetchUsers = () => {
+  return api.get("/users").then((response) => {
+    return response.data.users;
+  });
+};
+
+export const deleteComment = (commentId) => {
+  return api.delete(`/comments/${commentId}`).then((response) => {
+    return response.status;
   });
 };
