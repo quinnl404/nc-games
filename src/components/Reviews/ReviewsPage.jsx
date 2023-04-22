@@ -71,59 +71,62 @@ const ReviewsPage = () => {
           } Reviews`}</b>
         </h1>
         <div className="flex flex-col items-end gap-1">
-          <span className="flex gap-1">
+          <span className="flex gap-3">
             {!areSelectableCategoriesLoading && (
               <>
-                <label className="text-stone-50" htmlFor="review category">
-                  Choose a category:
-                </label>
-                <select
-                  onChange={handleChangeSearchParam("category")}
-                  value={searchParams.get("category") || "all"}
-                  className="text-center"
-                  name="review category"
-                >
-                  <option value="all">{"all"}</option>
-                  {selectableCategories.map((category) => {
-                    return (
-                      <option key={category.slug} value={category.slug}>
-                        {category.slug}
-                      </option>
-                    );
-                  })}
-                </select>
+                {" "}
+                <span className="flex gap-1">
+                  <label className="text-stone-50" htmlFor="review category">
+                    Choose a category:
+                  </label>
+                  <select
+                    onChange={handleChangeSearchParam("category")}
+                    value={searchParams.get("category") || "all"}
+                    className="text-center"
+                    name="review category"
+                  >
+                    <option value="all">{"all"}</option>
+                    {selectableCategories.map((category) => {
+                      return (
+                        <option key={category.slug} value={category.slug}>
+                          {category.slug}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </span>
+                <span className="flex gap-1">
+                  <label className="text-stone-50" htmlFor="order by">
+                    Order:
+                  </label>
+                  <select
+                    onChange={handleChangeSearchParam("order")}
+                    value={searchParams.get("order") || "descending"}
+                    className="text-center"
+                    name="order by"
+                  >
+                    <option value="asc">{"ascending"}</option>
+                    <option value="desc">{"descending"}</option>
+                  </select>
+                </span>
+                <span className="flex gap-1">
+                  <label className="text-stone-50" htmlFor="sort_by">
+                    Sort By:
+                  </label>
+                  <select
+                    onChange={handleChangeSearchParam("sort_by")}
+                    value={searchParams.get("sort_by") || "time"}
+                    className="text-center"
+                    name="sort_by"
+                  >
+                    <option value="created_at">{"time"}</option>
+                    <option value="comment_count">{"comments"}</option>
+                    <option value="votes">{"votes"}</option>
+                  </select>
+                </span>
               </>
             )}
             {!!areSelectableCategoriesLoading && <p>Loading...</p>}
-          </span>
-          <span className="flex gap-1">
-            <label className="text-stone-50" htmlFor="order by">
-              Order:
-            </label>
-            <select
-              onChange={handleChangeSearchParam("order")}
-              value={searchParams.get("order") || "descending"}
-              className="text-center"
-              name="order by"
-            >
-              <option value="asc">{"ascending"}</option>
-              <option value="desc">{"descending"}</option>
-            </select>
-          </span>
-          <span className="flex gap-1">
-            <label className="text-stone-50" htmlFor="sort_by">
-              Sort By:
-            </label>
-            <select
-              onChange={handleChangeSearchParam("sort_by")}
-              value={searchParams.get("sort_by") || "time"}
-              className="text-center"
-              name="sort_by"
-            >
-              <option value="created_at">{"time"}</option>
-              <option value="comment_count">{"comments"}</option>
-              <option value="votes">{"votes"}</option>
-            </select>
           </span>
         </div>
       </div>

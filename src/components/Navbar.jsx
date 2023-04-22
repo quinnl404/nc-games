@@ -13,7 +13,7 @@ const Navbar = () => {
     api.fetchUsers().then((fetchedUsers) => {
       setUsers(fetchedUsers);
     });
-  }, [users, setUsers]);
+  }, []);
 
   return (
     <nav className="bg-stone-900 top-0 h-12 flex flex-row justify-center items-center w-full fixed gap-5 z-50">

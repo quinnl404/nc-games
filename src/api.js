@@ -39,7 +39,7 @@ export const voteOnPost = (postData, incrementBy) => {
 
 export const postComment = (comment, reviewId) => {
   return api.post(`/reviews/${reviewId}/comments`, comment).then((response) => {
-    return response.data.comments;
+    return response.data.comment;
   });
 };
 

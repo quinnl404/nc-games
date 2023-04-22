@@ -114,11 +114,14 @@ const PostInfo = ({
   author,
   setComments,
   previousComments,
+  comments,
+  cantDelete,
 }) => {
   const [votes, setVotes] = useState(initialVotes);
   const { user } = useContext(UserContext);
 
   const handleDelete = () => {
+    previousComments.current = comments;
     api
       .deleteComment(postData.comment_id)
       .then(() => {
@@ -126,7 +129,7 @@ const PostInfo = ({
       })
       .catch(() => {
         toast.error("Deleting failed please try again later!");
-        setComments(previousComments);
+        setComments(previousComments.current);
       });
     setComments((currentComments) => {
       return currentComments.filter(
@@ -150,7 +153,7 @@ const PostInfo = ({
           <CommentIcon className="fill-stone-700 stroke-transparent" />
         </span>
       )}
-      {author === user ? (
+      {author === user && !cantDelete ? (
         <button onClick={handleDelete}>
           <DeleteIcon className="stroke-red-700 fill-red-300" />
         </button>

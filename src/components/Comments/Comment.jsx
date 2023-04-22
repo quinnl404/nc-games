@@ -1,7 +1,7 @@
 import PostInfo from "../PostInfo";
 import { useState } from "react";
 
-const Comment = ({ comment, setComments, previousComments }) => {
+const Comment = ({ comment, setComments, previousComments, comments }) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   return (
@@ -17,10 +17,12 @@ const Comment = ({ comment, setComments, previousComments }) => {
               author={comment.author}
               created_at={comment.created_at}
               initialVotes={comment.votes}
+              cantDelete={comment?.cantDelete}
               postData={comment}
               setComments={setComments}
               previousComments={previousComments}
               setIsDeleting={setIsDeleting}
+              comments={comments}
             />
           </span>
         </>

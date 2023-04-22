@@ -63,6 +63,7 @@ const SingleReviewPage = () => {
         setComments={setComments}
         setCommentCount={setCommentCount}
         reviewId={review_id}
+        comments={comments}
       />
       {!areCommentsLoading && (
         <section className="h-max flex flex-col items-center columns-1 gap-3  justify-items-center">
@@ -73,6 +74,7 @@ const SingleReviewPage = () => {
                 comment={comment}
                 setComments={setComments}
                 previousComments={previousComments}
+                comments={comments}
               />
             );
           })}

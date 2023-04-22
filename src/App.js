@@ -7,7 +7,7 @@ import SingleReviewPage from "./components/Reviews/SingleReviewPage";
 
 export const UserContext = createContext();
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("tickle122");
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
