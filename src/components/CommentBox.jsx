@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from "react";
-import { UserContext } from "../../App";
-import * as api from "../../api";
+import { UserContext } from "../App";
+import * as api from "../api";
 import toast from "react-hot-toast";
 
 const CommentBox = ({ setComments, setCommentCount, reviewId, comments }) => {

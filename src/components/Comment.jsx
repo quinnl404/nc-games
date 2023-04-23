@@ -1,4 +1,4 @@
-import PostInfo from "../PostInfo";
+import PostInfo from "./PostInfo";
 import { useState } from "react";
 
 const Comment = ({ comment, setComments, previousComments, comments }) => {

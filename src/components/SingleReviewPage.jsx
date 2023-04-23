@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import * as api from "../../api";
-import Comment from "../Comments/Comment";
-import CommentBox from "../Comments/CommentBox";
-import PostInfo from "../PostInfo";
+import * as api from "../api";
+import Comment from "./Comment";
+import CommentBox from "./CommentBox";
+import PostInfo from "./PostInfo";
 
 const SingleReviewPage = () => {
   const [commentCount, setCommentCount] = useState(0);
