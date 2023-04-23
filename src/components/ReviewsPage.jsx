@@ -2,17 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import toast from "react-hot-toast";
-import * as api from "../../api";
+import * as api from "../api";
+import { Divider } from "@mui/material";
 
 const ReviewsPage = () => {
   // Loading states
   const [areReviewsLoading, setAreReviewsLoading] = useState(true);
   const [areSelectableCategoriesLoading, setAreSelectableCategoriesLoading] =
     useState(true);
+  const [areUsersLoading, setAreUsersLoading] = useState(true);
 
   // Fetched state to display
   const [reviews, setReviews] = useState([]);
   const [selectableCategories, setSelectableCategories] = useState();
+  const [users, setUsers] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams({
     order: "desc",
   });
@@ -22,6 +25,11 @@ const ReviewsPage = () => {
 
   useEffect(() => {
     setAreReviewsLoading(true);
+
+    api.fetchUsers().then((users) => {
+      setUsers(users);
+      setAreUsersLoading(false);
+    });
     api.fetchCategories().then((categories) => {
       setSelectableCategories(categories);
       setAreSelectableCategoriesLoading(false);
@@ -134,16 +142,37 @@ const ReviewsPage = () => {
       </div>
       <div className="pl-1 pr-1 flex flex-col gap-5 flex-wrap items-center">
         {!areReviewsLoading &&
+          !areUsersLoading &&
           reviews.map((review, index) => {
-            return <ReviewCard key={index} review={review} />;
-          })}
-        {!!areReviewsLoading &&
-          new Array(10).fill(1).map((_, index) => {
             return (
-              <div
+              <ReviewCard
                 key={index}
-                className="w-96 h-[px] drop-shadow-md rounded-sm bg-stone-300"
-              ></div>
+                review={review}
+                avatar={
+                  users.find((user) => user.username === review.owner)
+                    .avatar_url
+                }
+              >
+                <ReviewCard.Header>
+                  <ReviewCard.Title />
+                  <ReviewCard.Category />
+                </ReviewCard.Header>
+                <ReviewCard.Image />
+                <Divider />
+                <ReviewCard.Info>
+                  <ReviewCard.Author />
+                </ReviewCard.Info>
+                <Divider />
+                <ReviewCard.OpenButton />
+                <Divider />
+                <ReviewCard.Footer>
+                  <ReviewCard.CreatedAt />
+                  <ReviewCard.MetaData>
+                    <ReviewCard.LikeCount />
+                    <ReviewCard.CommentCount />
+                  </ReviewCard.MetaData>
+                </ReviewCard.Footer>
+              </ReviewCard>
             );
           })}
       </div>

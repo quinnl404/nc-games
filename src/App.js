@@ -2,8 +2,8 @@ import { useState, createContext } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import ReviewsPage from "./components/Reviews/ReviewsPage";
-import SingleReviewPage from "./components/Reviews/SingleReviewPage";
+import ReviewsPage from "./components/ReviewsPage";
+import SingleReviewPage from "./components/SingleReviewPage";
 
 export const UserContext = createContext();
 const UserProvider = ({ children }) => {
